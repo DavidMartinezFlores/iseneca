@@ -91,7 +91,6 @@ class LogginScreen extends StatelessWidget {
         )
       ),
     );
-    
   }
 
   dynamic checkUser(String userName,String userPasswrod,List<User> userList)
