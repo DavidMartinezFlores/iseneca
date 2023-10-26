@@ -1,5 +1,12 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
+import 'package:iseneca/conf/providers/users_provider.dart';
+import 'package:iseneca/models/user.dart';
+import 'package:iseneca/presentation/screens/principal_menu.dart';
 import 'package:iseneca/theme/app_theme.dart';
+import 'package:provider/provider.dart';
+
 class LogginScreen extends StatelessWidget {
   const LogginScreen({super.key});
   
@@ -11,6 +18,8 @@ class LogginScreen extends StatelessWidget {
     final userTextController = TextEditingController();
     final passwordTextController = TextEditingController();
 
+    final userProvider = context.watch<UserProvider>();
+  
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -29,11 +38,11 @@ class LogginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: screenSize.height*0.05,),
       
-                  _InputLogginUser(userTextController: userTextController,text: 'Usuario'),
+                  _InputLogginUser(userTextController: userTextController,passwordTextController:passwordTextController,text: 'Usuario'),
       
                   SizedBox(height: screenSize.height*0.04,),
       
-                  _InputLogginPassword(userTextController: passwordTextController,text: 'Contraseña'),
+                  _InputLogginPassword(userTextController: userTextController,passwordTextController:passwordTextController,text: 'Contraseña'),
       
                   SizedBox(height: screenSize.height*0.04,),
       
@@ -49,7 +58,12 @@ class LogginScreen extends StatelessWidget {
                         backgroundColor: MaterialStateProperty.all(appTheme.secondaryHeaderColor)
                       ),
                     onPressed: () {
-                    
+                      dynamic user = checkUser(userTextController.value.text, passwordTextController.value.text, userProvider.userList);
+                      
+                      if(user!=null)
+                      {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+                      }
                     }, 
                     child: Text("Entrar",style: TextStyle(color: appTheme.primaryColor,fontWeight: FontWeight.bold),)
                   ),
@@ -77,6 +91,19 @@ class LogginScreen extends StatelessWidget {
         )
       ),
     );
+    
+  }
+
+  dynamic checkUser(String userName,String userPasswrod,List<User> userList)
+  {
+    for(User user in userList)
+    {
+      if(user.userName==userName && user.userPassword==userPasswrod)
+      {
+        return user;
+      }
+    }
+    return null;
   }
 }
 
@@ -86,7 +113,6 @@ class _UnderLineButton extends StatelessWidget {
   _UnderLineButton({ required this.text});
 
   
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -106,19 +132,32 @@ class _UnderLineButton extends StatelessWidget {
 class _InputLogginUser extends StatelessWidget {
   final String text;
   const _InputLogginUser({
-    required this.userTextController, required this.text,
+    required this.passwordTextController, required this.text, required this.userTextController,
   });
-
+  
+  final TextEditingController passwordTextController;
   final TextEditingController userTextController;
+
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = context.watch<UserProvider>();
     final appTheme = const AppTheme().getTheme();
+
     var focus = FocusNode();
     return TextFormField(
       focusNode: focus,
       onTapOutside: (event) {
         focus=FocusNode();
+      },
+      onFieldSubmitted: (value) {
+        for(User user in userProvider.userList)
+        {
+          if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
+          {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+          }
+        }
       },
       style: TextStyle(color: appTheme.secondaryHeaderColor,fontWeight: FontWeight.bold),
       controller: userTextController,
@@ -140,13 +179,16 @@ class _InputLogginUser extends StatelessWidget {
 class _InputLogginPassword extends StatelessWidget {
   final String text;
   const _InputLogginPassword({
-    required this.userTextController, required this.text,
+    required this.userTextController, required this.text, required this.passwordTextController,
   });
 
+
+  final TextEditingController passwordTextController;
   final TextEditingController userTextController;
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = context.watch<UserProvider>();
     final appTheme = const AppTheme().getTheme();
     var focus = FocusNode();
     return TextFormField(
@@ -154,8 +196,17 @@ class _InputLogginPassword extends StatelessWidget {
       onTapOutside: (event) {
         focus=FocusNode();
       },
+      onFieldSubmitted: (value) {
+        for(User user in userProvider.userList)
+        {
+          if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
+          {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+          }
+        }
+      },
       style: TextStyle(color: appTheme.secondaryHeaderColor,fontWeight: FontWeight.bold),
-      controller: userTextController,
+      controller: passwordTextController,
       decoration: InputDecoration(
         filled: true,
         fillColor:Colors.white.withOpacity(0.1),
