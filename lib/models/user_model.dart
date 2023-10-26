@@ -15,17 +15,20 @@ class UserModel {
     final String userName;
     final String userPassword;
     final String center;
+    final String profile;
 
     UserModel( {
         required this.userName,
         required this.userPassword,
         required this.center,
+        required this.profile
     });
 
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         userName: json["userName"],
         userPassword: json["userPassword"],
-        center: json["center"]
+        center: json["center"],
+        profile: json["profile"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,7 +42,7 @@ class UserModel {
 
       for(Map map in localUser)
       {
-        usersList.add(User(userName: map["userName"], userPassword: map["userPassword"],center: map["center"]));
+        usersList.add(User(fullName: map["fullName"],userName: map["userName"], userPassword: map["userPassword"],center: map["center"],profile: map["profile"]));
       }
       return usersList;
     }
