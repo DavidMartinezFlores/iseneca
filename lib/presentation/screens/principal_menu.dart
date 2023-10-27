@@ -53,6 +53,7 @@ class PrincipalMenu extends StatelessWidget {
         children: [
           Stack(
             children:[ 
+
               Container(
               color: appTheme.primaryColor,
               width: screenSize.width,
@@ -60,72 +61,8 @@ class PrincipalMenu extends StatelessWidget {
               
               Align(
                 alignment: Alignment.center,
-                child: SizedBox(
-                  width: screenSize.width*0.95,
-                  height: screenSize.height*0.22,
-                  child: 
-                  Card(
-                    child: 
-                    Column(
-                        children: [
-                          
-                          ListTile(
-                            trailing: const Icon(Icons.people),
-                            title: Text(user.fullName,style: const TextStyle(fontWeight:FontWeight.bold)),
-                            subtitle: Text("${user.center} \n${user.profile}",style: TextStyle(color: appTheme.primaryColor,fontSize: 15),),
-                          ),
-                          SizedBox(
-                            height: screenSize.height*0.005,
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 44, 147, 207),
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12),bottomRight: Radius.circular(12))
-                              )
-                              ,
-                              child: 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    FilledButton.icon(
-                                      style: const ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(),
-                                          ),
-                                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 44, 147, 207)),
-                                      ),
-                                      onPressed: () {
-                                      
-                                    }, icon: const Icon(Icons.alarm),
-                                    label: const Text("Avisos")
-                                    ),
-
-                                    VerticalDivider(color: appTheme.secondaryHeaderColor),
-
-                                    FilledButton.icon(
-                                      style: const ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(),
-                                          ),
-                                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 44, 147, 207)),
-                                      ),
-                                      onPressed: () {
-                                      
-                                    }, icon: const Icon(Icons.book),
-                                    label: const Text("Avisos")
-                                    ),
-                                  ],
-                                ),
-                             ),
-                          )
-
-                        ],
-                      )
-                  ),
-                ),
+                child: 
+                PersonalizedCard(screenSize: screenSize, user: user, appTheme: appTheme),
               ),
             ]
           ),
@@ -133,120 +70,216 @@ class PrincipalMenu extends StatelessWidget {
           SizedBox(
             height: screenSize.height*0.05,
           ),
-
-          Align(
-            alignment: Alignment.center,
-            child: 
-            Container(
-              width: screenSize.width*0.95,
-              child: 
-              Column(
-                children: [
-                  Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3)),bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
-                      ),
-                      width: screenSize.width*0.3,
-                      height: screenSize.height*0.2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: screenSize.width*0.15,
-                            child: Image.asset('assets/images/sombrero.png')
-                          ),
-                          const Text("Alumnado del centro",textAlign: TextAlign.center,)
-                        ],
-                      ),
-                    ),
           
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3)),bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
-                      ),
-                      width: screenSize.width*0.3,
-                      height: screenSize.height*0.2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: screenSize.width*0.15,
-                            child: Image.asset('assets/images/profesor.png')
-                          ),
-                          const Text("Personal del centro",textAlign: TextAlign.center,)
-                        ],
-                      ),
-                    ),
-          
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border( bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
-                      ),
-                      width: screenSize.width*0.32,
-                      height: screenSize.height*0.2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: screenSize.width*0.15,
-                            child: Image.asset('assets/images/covid.png')
-                          ),
-                          const Text("Información Covid",textAlign: TextAlign.center,)
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-          
-          
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3))),
-                      ),
-                      width: screenSize.width*0.3,
-                      height: screenSize.height*0.2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: screenSize.width*0.1,
-                            child: Image.asset('assets/images/campana.png')
-                          ),
-                          const Text("Tablón de anuncios",textAlign: TextAlign.center,)
-                        ],
-                      ),
-                    ),
-          
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3))),
-                      ),
-                      width: screenSize.width*0.3,
-                      height: screenSize.height*0.2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: screenSize.width*0.15,
-                            child: Image.asset('assets/images/calendario.png')
-                          ),
-                          const Text("Calendario escolar",textAlign: TextAlign.center,)
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-             
-                ],
-              ),
-            ),
-          )
-          
+          PersonalizedTable(screenSize: screenSize)
         ],
+      ),
+    );
+  }
+}
+
+class PersonalizedCard extends StatelessWidget {
+  const PersonalizedCard({
+    super.key,
+    required this.screenSize,
+    required this.user,
+    required this.appTheme,
+  });
+
+  final Size screenSize;
+  final User user;
+  final ThemeData appTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: screenSize.width*0.95,
+      height: screenSize.height*0.22,
+      child: 
+      Card(
+        child: 
+        Column(
+            children: [
+              
+              ListTile(
+                trailing: const Icon(Icons.people),
+                title: Text(user.fullName,style: const TextStyle(fontWeight:FontWeight.bold)),
+                subtitle: Text("${user.center} \n${user.profile}",style: TextStyle(color: appTheme.primaryColor,fontSize: 15),),
+              ),
+              SizedBox(
+                height: screenSize.height*0.005,
+              ),
+
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 44, 147, 207),
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12),bottomRight: Radius.circular(12))
+                  )
+                  ,
+                  child: 
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        FilledButton.icon(
+                          style: const ButtonStyle(
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(),
+                              ),
+                            backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 44, 147, 207)),
+                          ),
+                          onPressed: () {
+                          
+                        }, icon: const Icon(Icons.alarm),
+                        label: const Text("Avisos")
+                        ),
+
+                        VerticalDivider(color: appTheme.secondaryHeaderColor),
+
+                        FilledButton.icon(
+                          style: const ButtonStyle(
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(),
+                              ),
+                            backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 44, 147, 207)),
+                          ),
+                          onPressed: () {
+                          
+                        }, icon: const Icon(Icons.book),
+                        label: const Text("Avisos")
+                        ),
+                      ],
+                    ),
+                 ),
+              )
+
+            ],
+          )
+      ),
+    );
+  }
+}
+
+class PersonalizedTable extends StatelessWidget {
+  const PersonalizedTable({
+    super.key,
+    required this.screenSize,
+  });
+
+  final Size screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: 
+      SizedBox(
+        width: screenSize.width*0.95,
+        child: 
+        Column(
+          children: [
+            Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3)),bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
+                ),
+                width: screenSize.width*0.3,
+                height: screenSize.height*0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenSize.width*0.15,
+                      child: Image.asset('assets/images/sombrero.png')
+                    ),
+                    const Text("Alumnado del centro",textAlign: TextAlign.center,)
+                  ],
+                ),
+              ),
+    
+              Container(
+                decoration: BoxDecoration(
+                  border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3)),bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
+                ),
+                width: screenSize.width*0.3,
+                height: screenSize.height*0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenSize.width*0.15,
+                      child: Image.asset('assets/images/profesor.png')
+                    ),
+                    const Text("Personal del centro",textAlign: TextAlign.center,)
+                  ],
+                ),
+              ),
+    
+              Container(
+                decoration: BoxDecoration(
+                  border: Border( bottom: BorderSide(color: Colors.grey.withOpacity(0.3))),
+                ),
+                width: screenSize.width*0.32,
+                height: screenSize.height*0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenSize.width*0.15,
+                      child: Image.asset('assets/images/covid.png')
+                    ),
+                    const Text("Información Covid",textAlign: TextAlign.center,)
+                  ],
+                ),
+              ),
+            ],
+          ),
+    
+    
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3))),
+                ),
+                width: screenSize.width*0.3,
+                height: screenSize.height*0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenSize.width*0.1,
+                      child: Image.asset('assets/images/campana.png')
+                    ),
+                    const Text("Tablón de anuncios",textAlign: TextAlign.center,)
+                  ],
+                ),
+              ),
+    
+              Container(
+                decoration: BoxDecoration(
+                  border: Border( right: BorderSide(color: Colors.grey.withOpacity(0.3))),
+                ),
+                width: screenSize.width*0.3,
+                height: screenSize.height*0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenSize.width*0.15,
+                      child: Image.asset('assets/images/calendario.png')
+                    ),
+                    const Text("Calendario escolar",textAlign: TextAlign.center,)
+                  ],
+                ),
+              ),
+            ],
+          ),
+       
+          ],
+        ),
       ),
     );
   }
