@@ -63,6 +63,8 @@ class LogginScreen extends StatelessWidget {
                       if(user!=null)
                       {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+                      }else{
+                        alertDialog(context);
                       }
                     }, 
                     child: Text("Entrar",style: TextStyle(color: appTheme.primaryColor,fontWeight: FontWeight.bold),)
@@ -93,6 +95,28 @@ class LogginScreen extends StatelessWidget {
     );
   }
 
+  Future<dynamic> alertDialog(BuildContext context) {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => 
+        AlertDialog(
+          actions: [
+            Column(
+              children: [
+                const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+                const Text("Usuario o contraseña incorrectos",style:TextStyle(color: Colors.red)),
+                TextButton(onPressed: () {
+                  Navigator.pop(context);
+                }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+              ],
+            ),
+          ],
+
+        )
+      );
+  }
+
   dynamic checkUser(String userName,String userPasswrod,List<User> userList)
   {
     for(User user in userList)
@@ -116,7 +140,25 @@ class _UnderLineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) => 
+          AlertDialog(
+            actions: [
+              Column(
+                children: [
+                  const Text("! RECUPERACION!",style: TextStyle(color: Colors.red,fontSize: 20),),
+                  const Text("Actualmente no es posible recuperar la password",style:TextStyle(color: Colors.red),textAlign: TextAlign.center,),
+                  TextButton(onPressed: () {
+                    Navigator.pop(context);
+                  }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+                ],
+              ),
+            ],
+
+          )
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width*0.5,
@@ -147,16 +189,40 @@ class _InputLogginUser extends StatelessWidget {
     return TextFormField(
       focusNode: focus,
       onTapOutside: (event) {
-        focus=FocusNode();
+        
       },
       onFieldSubmitted: (value) {
+        bool isLogged = false;
         for(User user in userProvider.userList)
         {
           if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
           {
+            isLogged=true;
             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
           }
         }
+        if(!isLogged)
+        {
+          showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => 
+            AlertDialog(
+              actions: [
+                Column(
+                  children: [
+                    const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+                    const Text("Usuario o contraseña incorrectos",style:TextStyle(color: Colors.red)),
+                    TextButton(onPressed: () {
+                      Navigator.pop(context);
+                    }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+                  ],
+                ),
+              ],
+            )
+          );
+        }
+        
       },
       style: TextStyle(color: appTheme.secondaryHeaderColor,fontWeight: FontWeight.bold),
       controller: userTextController,
@@ -193,15 +259,38 @@ class _InputLogginPassword extends StatelessWidget {
     return TextFormField(
       focusNode: focus,
       onTapOutside: (event) {
-        focus=FocusNode();
+        
       },
       onFieldSubmitted: (value) {
+        bool isLogged = false;
         for(User user in userProvider.userList)
         {
           if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
           {
+            isLogged=true;
             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
           }
+        }
+        if(!isLogged)
+        {
+          showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => 
+            AlertDialog(
+              actions: [
+                Column(
+                  children: [
+                    const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+                    const Text("Usuario o contraseña incorrectos",style:TextStyle(color: Colors.red)),
+                    TextButton(onPressed: () {
+                      Navigator.pop(context);
+                    }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+                  ],
+                ),
+              ],
+            )
+          );
         }
       },
       style: TextStyle(color: appTheme.secondaryHeaderColor,fontWeight: FontWeight.bold),
@@ -209,7 +298,9 @@ class _InputLogginPassword extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor:Colors.white.withOpacity(0.1),
-        suffixIcon: Icon(Icons.remove_red_eye,color: appTheme.secondaryHeaderColor,),
+        suffixIcon: IconButton(onPressed: () {
+          
+        }, icon: Icon(Icons.remove_red_eye,color: appTheme.secondaryHeaderColor,)),
         hintText: text,
         hintStyle: TextStyle(color: appTheme.secondaryHeaderColor,fontWeight: FontWeight.bold),
         enabledBorder: OutlineInputBorder(
