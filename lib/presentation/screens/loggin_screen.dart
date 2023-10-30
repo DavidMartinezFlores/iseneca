@@ -121,7 +121,7 @@ class LogginScreen extends StatelessWidget {
   {
     for(User user in userList)
     {
-      if(user.userName==userName && user.userPassword==userPasswrod)
+      if(user.userName==userName.trim() && user.userPassword==userPasswrod.trim())
       {
         return user;
       }
@@ -195,7 +195,7 @@ class _InputLogginUser extends StatelessWidget {
         bool isLogged = false;
         for(User user in userProvider.userList)
         {
-          if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
+          if(user.userName==userTextController.value.text.trim() && user.userPassword==passwordTextController.value.text.trim())
           {
             isLogged=true;
             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
@@ -265,7 +265,7 @@ class _InputLogginPassword extends StatelessWidget {
         bool isLogged = false;
         for(User user in userProvider.userList)
         {
-          if(user.userName==userTextController.value.text && user.userPassword==passwordTextController.value.text)
+          if(user.userName==userTextController.value.text.trim() && user.userPassword==passwordTextController.value.text.trim())
           {
             isLogged=true;
             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
