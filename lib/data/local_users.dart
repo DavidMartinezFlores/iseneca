@@ -15,7 +15,7 @@ List<Map<String,String>> localUser = [
   },
     {
     "userName":"Alba",
-    "fullName":"Rodriguez Fernandez, David",
+    "fullName":"Rodriguez Fernandez, Alba",
     "userPassword":"1234",
     "center":"I.E.S JANDULA",
     "profile":"Perfil Alumno"
