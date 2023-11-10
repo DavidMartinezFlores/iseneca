@@ -1,9 +1,11 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iseneca/conf/providers/users_provider.dart';
-import 'package:iseneca/models/user.dart';
+import 'package:iseneca/models/user_local.dart';
 import 'package:iseneca/presentation/screens/principal_menu.dart';
+import 'package:iseneca/services/firebase_service.dart';
 import 'package:iseneca/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -69,12 +71,43 @@ class LogginScreen extends StatelessWidget {
                     }, 
                     child: Text("Entrar",style: TextStyle(color: appTheme.primaryColor,fontWeight: FontWeight.bold),)
                   ),
+                   FilledButton(
+                    style: 
+                      ButtonStyle(
+                        minimumSize: MaterialStatePropertyAll(Size.fromHeight(screenSize.height*0.05)),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(appTheme.secondaryHeaderColor)
+                      ),
+                    onPressed: () async {
+                      FirebaseService service = new FirebaseService();
+                      try {
+                      await service.signInwithGoogle();
+                        User? userGoogle = FirebaseAuth.instance.currentUser;
+                        if(userGoogle!=null)
+                        {
+                        
+                        var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: "center", profile: "profile", fullName: "userGoogle.displayName");
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+                      
+                        }
+                        } catch(e){
+                        if(e is FirebaseAuthException){
+                          print("LEGEO ERRONEO");
+                        }
+          }
+                    }, 
+                    child: Text("Entrar Con Google",style: TextStyle(color: appTheme.primaryColor,fontWeight: FontWeight.bold),)
+                  ),
       
                   SizedBox(height: screenSize.height*0.05,),
       
                   _UnderLineButton(text: 'No recuerdo mi contraseña'),
                   
-                  SizedBox(height: screenSize.height*0.08,),
+                  SizedBox(height: screenSize.height*0.03,),
                   
                   ListTile(
                     leading: Image.asset("assets/images/juntaLogo.png"),
@@ -117,9 +150,9 @@ class LogginScreen extends StatelessWidget {
       );
   }
 
-  dynamic checkUser(String userName,String userPasswrod,List<User> userList)
+  dynamic checkUser(String userName,String userPasswrod,List<UserLocal> userList)
   {
-    for(User user in userList)
+    for(UserLocal user in userList)
     {
       if(user.userName==userName.trim() && user.userPassword==userPasswrod.trim())
       {
@@ -193,7 +226,7 @@ class _InputLogginUser extends StatelessWidget {
       },
       onFieldSubmitted: (value) {
         bool isLogged = false;
-        for(User user in userProvider.userList)
+        for(UserLocal user in userProvider.userList)
         {
           if(user.userName==userTextController.value.text.trim() && user.userPassword==passwordTextController.value.text.trim())
           {
@@ -263,7 +296,7 @@ class _InputLogginPassword extends StatelessWidget {
       },
       onFieldSubmitted: (value) {
         bool isLogged = false;
-        for(User user in userProvider.userList)
+        for(UserLocal user in userProvider.userList)
         {
           if(user.userName==userTextController.value.text.trim() && user.userPassword==passwordTextController.value.text.trim())
           {

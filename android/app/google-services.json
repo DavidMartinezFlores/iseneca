@@ -1,0 +1,266 @@
+{
+  "project_info": {
+    "project_number": "619144667527",
+    "project_id": "isenafirebase",
+    "storage_bucket": "isenafirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:ad31816ac1448436053322",
+        "android_client_info": {
+          "package_name": "com.example.david_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-e0qvg974b8bv0s2fi3loisqqilqi4qk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.david_app",
+            "certificate_hash": "94d005cce0d9a296d9a0e8cac01afddf42b78068"
+          }
+        },
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:c22797d54d7a1086053322",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-tv7qhk0r71ft3een075fv8qg3iih8trk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase",
+            "certificate_hash": "94d005cce0d9a296d9a0e8cac01afddf42b78068"
+          }
+        },
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:a77d0d9620953c86053322",
+        "android_client_info": {
+          "package_name": "com.example.firebase_google_sign_in_tutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-1j1u6593ji5parogqislk8kqdllocfkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase_google_sign_in_tutorial",
+            "certificate_hash": "94d005cce0d9a296d9a0e8cac01afddf42b78068"
+          }
+        },
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:4b7b49f2d901b891053322",
+        "android_client_info": {
+          "package_name": "com.example.google_sign_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-lbck7k5li4o3kh8ionkqsq1nn8t85pcm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.google_sign_in",
+            "certificate_hash": "94d005cce0d9a296d9a0e8cac01afddf42b78068"
+          }
+        },
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:30aa0b589cbd84d6053322",
+        "android_client_info": {
+          "package_name": "com.example.iseneca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619144667527:android:5bfad49aea55593b053322",
+        "android_client_info": {
+          "package_name": "com.example.navigator_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619144667527-650f3p65fb7d8dr12uta5s5kg8bck2r0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.navigator_app",
+            "certificate_hash": "94d005cce0d9a296d9a0e8cac01afddf42b78068"
+          }
+        },
+        {
+          "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEMlp9yB8ynD-oasUlJ2vHTeaXXSZzL44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619144667527-4r84ark9vv3dmjn5vicvr11jkns3ggf4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "619144667527-0ip6lm8k02ngblcvf69amh688put6fsl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseGoogleSignInTutorial"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

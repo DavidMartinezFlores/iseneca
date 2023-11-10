@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iseneca/models/user.dart';
+import 'package:iseneca/models/user_local.dart';
 import 'package:iseneca/theme/app_theme.dart';
 class PrincipalMenu extends StatelessWidget {
-  final User user;
+  final UserLocal user;
   const PrincipalMenu({super.key, required this.user});
 
   @override
@@ -87,7 +87,7 @@ class PersonalizedCard extends StatelessWidget {
   });
 
   final Size screenSize;
-  final User user;
+  final UserLocal user;
   final ThemeData appTheme;
 
   @override

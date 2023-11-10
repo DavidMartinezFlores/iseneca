@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:iseneca/data/local_users.dart';
-import 'package:iseneca/models/user.dart';
+import 'package:iseneca/models/user_local.dart';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
@@ -36,13 +36,13 @@ class UserModel {
         "userPassword": userPassword,
     };
 
-    static List<User> getUserList()
+    static List<UserLocal> getUserList()
     {
-      List<User> usersList=[];
+      List<UserLocal> usersList=[];
 
       for(Map map in localUser)
       {
-        usersList.add(User(fullName: map["fullName"],userName: map["userName"], userPassword: map["userPassword"],center: map["center"],profile: map["profile"]));
+        usersList.add(UserLocal(fullName: map["fullName"],userName: map["userName"], userPassword: map["userPassword"],center: map["center"],profile: map["profile"]));
       }
       return usersList;
     }
