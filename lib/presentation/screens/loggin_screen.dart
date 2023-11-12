@@ -90,7 +90,7 @@ class LogginScreen extends StatelessWidget {
                         if(userGoogle!=null)
                         {
                         
-                        var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: "center", profile: "profile", fullName: "userGoogle.displayName");
+                        var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
                       
                         }
