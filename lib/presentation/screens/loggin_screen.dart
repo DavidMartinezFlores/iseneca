@@ -8,12 +8,14 @@ import 'package:iseneca/presentation/screens/principal_menu.dart';
 import 'package:iseneca/services/firebase_service.dart';
 import 'package:iseneca/theme/app_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class LogginScreen extends StatelessWidget {
   const LogginScreen({super.key});
   
   @override
   Widget build(BuildContext context) {
+    
     final appTheme = const AppTheme().getTheme();
     final screenSize = MediaQuery.of(context).size;
 
@@ -89,10 +91,46 @@ class LogginScreen extends StatelessWidget {
                         User? userGoogle = FirebaseAuth.instance.currentUser;
                         if(userGoogle!=null)
                         {
+                          bool exist = false;
+                          for(Map<dynamic,dynamic> userMapTemp in userProvider.userMap)
+                          {
                         
-                        var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
-                      
+                            if(userGoogle.email==userMapTemp["email"])
+                            {
+                              exist=true;
+                              break;
+                            }
+                            
+                          }
+                          if(exist)
+                          {
+                            var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+                          }
+                          else
+                          {
+                            
+                            return showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) => 
+                              AlertDialog(
+                                actions: [
+                                  Column(
+                                    children: [
+                                      const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+                                      Text("Usuario NO PERMITIDO (${userGoogle.email})",style:const TextStyle(color: Colors.red)),
+                                      TextButton(onPressed: () {
+                                        Navigator.pop(context);
+                                      }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+                                    ],
+                                  ),
+                                ],
+
+                              )
+                            );
+                          }
+
                         }
                         } catch(e){
                         if(e is FirebaseAuthException){
