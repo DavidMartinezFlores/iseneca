@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:iseneca/models/user_local.dart';
 import 'package:iseneca/services/firebase_service.dart';
@@ -5,12 +8,134 @@ import 'package:iseneca/theme/app_theme.dart';
 class PrincipalMenu extends StatelessWidget {
   final UserLocal user;
   const PrincipalMenu({super.key, required this.user});
+// bool exist = false;
+//                           for(Map<dynamic,dynamic> userMapTemp in userProvider.userMap)
+//                           {
+                        
+//                             if(userGoogle.email==userMapTemp["email"])
+//                             {
+//                               exist=true;
+//                               break;
+//                             }
+                            
+//                           }
+//                           if(exist)
+//                           {
+//                             var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
+//                             // ignore: use_build_context_synchronously
+//                             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+//                           }
+//                           else
+//                           {
+//                              // ignore: use_build_context_synchronously
+//                              showDialog(
+//                               barrierDismissible: false,
+//                               context: context,
+//                               builder: (context) => 
+//                               AlertDialog(
+//                                 actions: [
+//                                   Column(
+//                                     children: [
+//                                       const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+//                                       Text("Usuario NO PERMITIDO (${userGoogle.email})",style:const TextStyle(color: Colors.red)),
+//                                       TextButton(onPressed: () {
+//                                         service.signOutFromGoogle();
+//                                         Navigator.pop(context);
+                                        
+//                                       }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+//                                     ],
+//                                   ),
+//                                 ],
+
+//                               )
+//                             );
+//                           }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final appTheme = const AppTheme().getTheme();
 
+    return FutureBuilder(
+      future: fillEmails(), 
+      builder: (context, snapshot) {
+        if(snapshot.data!=null)
+        {
+          bool exist = false;
+          for(Map<dynamic,dynamic> userMapTemp in jsonDecode(snapshot.data.toString()))
+          {
+        
+            if(user.center==userMapTemp["email"])
+            {
+              exist=true;
+              break;
+            }
+            
+          }
+          if(exist)
+          {
+            // ignore: use_build_context_synchronously
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+          }
+          else
+          {
+            FirebaseService service = FirebaseService();
+              // ignore: use_build_context_synchronously
+              showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => 
+              AlertDialog(
+                actions: [
+                  Column(
+                    children: [
+                      const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
+                      Text("Usuario NO PERMITIDO (${user.center})",style:const TextStyle(color: Colors.red)),
+                      TextButton(onPressed: () {
+                        service.signOutFromGoogle();
+                        Navigator.pop(context);
+                        
+                      }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
+                    ],
+                  ),
+                ],
+
+              )
+            );
+          }
+          return MenuScreen(appTheme: appTheme, screenSize: screenSize, user: user);
+        }
+        else
+        {
+          return CircularProgressIndicator();
+        }
+      },);
+    
+    //
+    
+  }
+  Future<dynamic>fillEmails()  {
+    Dio dio = Dio();
+    var response = dio.get('https://script.google.com/macros/s/AKfycbza-4_cGrNwZtsk1JmIvTDq5KBiZZLj-U5aV1h6E6Zxfd56LiAG2XPLEFOuD4K6bmKT-Q/exec?spreadsheetId=1Qt5sghI2oMo-_ODI1pdDBlFkoiE5orcc0fqIvI6P470&sheet=usuarios');
+    
+    return response;
+  }
+}
+
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({
+    super.key,
+    required this.appTheme,
+    required this.screenSize,
+    required this.user,
+  });
+
+  final ThemeData appTheme;
+  final Size screenSize;
+  final UserLocal user;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,

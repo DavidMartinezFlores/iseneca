@@ -1,5 +1,8 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iseneca/conf/providers/users_provider.dart';
@@ -90,48 +93,8 @@ class LogginScreen extends StatelessWidget {
                         User? userGoogle = FirebaseAuth.instance.currentUser;
                         if(userGoogle!=null)
                         {
-                          bool exist = false;
-                          for(Map<dynamic,dynamic> userMapTemp in userProvider.userMap)
-                          {
-                        
-                            if(userGoogle.email==userMapTemp["email"])
-                            {
-                              exist=true;
-                              break;
-                            }
-                            
-                          }
-                          if(exist)
-                          {
-                            var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
-                          }
-                          else
-                          {
-                             // ignore: use_build_context_synchronously
-                             showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => 
-                              AlertDialog(
-                                actions: [
-                                  Column(
-                                    children: [
-                                      const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
-                                      Text("Usuario NO PERMITIDO (${userGoogle.email})",style:const TextStyle(color: Colors.red)),
-                                      TextButton(onPressed: () {
-                                        service.signOutFromGoogle();
-                                        Navigator.pop(context);
-                                        
-                                      }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
-                                    ],
-                                  ),
-                                ],
-
-                              )
-                            );
-                          }
+                          var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
 
                         }
                         } catch(e){
