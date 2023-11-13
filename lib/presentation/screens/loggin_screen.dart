@@ -8,7 +8,6 @@ import 'package:iseneca/presentation/screens/principal_menu.dart';
 import 'package:iseneca/services/firebase_service.dart';
 import 'package:iseneca/theme/app_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 class LogginScreen extends StatelessWidget {
   const LogginScreen({super.key});
@@ -85,7 +84,7 @@ class LogginScreen extends StatelessWidget {
                         backgroundColor: MaterialStateProperty.all(appTheme.secondaryHeaderColor)
                       ),
                     onPressed: () async {
-                      FirebaseService service = new FirebaseService();
+                      FirebaseService service = FirebaseService();
                       try {
                       await service.signInwithGoogle();
                         User? userGoogle = FirebaseAuth.instance.currentUser;
@@ -105,12 +104,13 @@ class LogginScreen extends StatelessWidget {
                           if(exist)
                           {
                             var user = UserLocal(userName: userGoogle.displayName!, userPassword: "userPassword", center: userGoogle.email!, profile: "profile", fullName: userGoogle.displayName!);
+                            // ignore: use_build_context_synchronously
                             Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
                           }
                           else
                           {
-                            
-                            return showDialog(
+                             // ignore: use_build_context_synchronously
+                             showDialog(
                               barrierDismissible: false,
                               context: context,
                               builder: (context) => 
@@ -131,15 +131,14 @@ class LogginScreen extends StatelessWidget {
 
                               )
                             );
-                           
                           }
 
                         }
                         } catch(e){
-                        if(e is FirebaseAuthException){
-                          print("LEGEO ERRONEO");
+                          if(e is FirebaseAuthException){
+                            
+                          }
                         }
-          }
                     }, 
                     child: Text("Entrar Con Google",style: TextStyle(color: appTheme.primaryColor,fontWeight: FontWeight.bold),)
                   ),
