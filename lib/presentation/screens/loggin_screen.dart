@@ -121,7 +121,9 @@ class LogginScreen extends StatelessWidget {
                                       const Text("! CUIDADO !",style: TextStyle(color: Colors.red,fontSize: 30),),
                                       Text("Usuario NO PERMITIDO (${userGoogle.email})",style:const TextStyle(color: Colors.red)),
                                       TextButton(onPressed: () {
+                                        service.signOutFromGoogle();
                                         Navigator.pop(context);
+                                        
                                       }, child: const Text("Reintentar",style: TextStyle(decoration: TextDecoration.underline),)),
                                     ],
                                   ),
@@ -129,6 +131,7 @@ class LogginScreen extends StatelessWidget {
 
                               )
                             );
+                           
                           }
 
                         }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iseneca/models/user_local.dart';
+import 'package:iseneca/services/firebase_service.dart';
 import 'package:iseneca/theme/app_theme.dart';
 class PrincipalMenu extends StatelessWidget {
   final UserLocal user;
@@ -102,7 +103,10 @@ class PersonalizedCard extends StatelessWidget {
             children: [
               
               ListTile(
-                trailing: const Icon(Icons.people),
+                trailing: IconButton(icon: const Icon(Icons.exit_to_app),onPressed: () {
+                  FirebaseService().signOutFromGoogle();
+                  Navigator.pop(context);
+                },),
                 title: Text(user.fullName,style: const TextStyle(fontWeight:FontWeight.bold)),
                 subtitle: Text("${user.center} \n${user.profile}",style: TextStyle(color: appTheme.primaryColor,fontSize: 15),),
               ),
