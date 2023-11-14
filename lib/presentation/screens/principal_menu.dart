@@ -33,7 +33,7 @@ class PrincipalMenu extends StatelessWidget {
           if(exist)
           {
             // ignore: use_build_context_synchronously
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PrincipalMenu(user: user)));
+            return MenuScreen(appTheme: appTheme, screenSize: screenSize, user: user);
           }
           else
           {
@@ -42,7 +42,7 @@ class PrincipalMenu extends StatelessWidget {
               // ignore: use_build_context_synchronously
             return _NoValidUser(screenSize: screenSize, user: user, service: service);
           }
-          return MenuScreen(appTheme: appTheme, screenSize: screenSize, user: user);
+          
         }
         else
         {
