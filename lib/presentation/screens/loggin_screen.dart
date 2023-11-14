@@ -1,8 +1,5 @@
 // ignore_for_file: unrelated_type_equality_checks
 
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iseneca/conf/providers/users_provider.dart';
